@@ -1,1 +1,119 @@
 # AnimeCollectionProject
+
+Requirement :
+## Anime List Page
+
+### Anime List
+[ ] As a user, I can see 10 anime on initial page load.
+
+Acceptance Criteria:
+- [ ] For each anime, show info at least the anime title and anime cover/banner.
+- [ ] Each anime item are clickable, and will redirect to Anime Detail page when clicked.- [ ] Anime List page should have pagination functionality.
+
+### Bulk add to the collection.
+[ ] As a user, I can add multiple anime to the collection at once.
+
+Acceptance Criteria:
+- [ ] User can select multiple anime item/card to be added into a collection via Modal/PopUp form.
+- [ ] If user want to bulk add anime to collection but there is no collection yet, user can set collection name as new collection.
+- [ ] Collection Name must unique
+- [ ] Collection Name doesn’t have special Char
+
+## Anime Detail Page
+
+### Anime Detail Info
+[ ] As a user, I can anime info on the page.
+
+Acceptance Criteria:
+- [ ] Show anime cover/banner.
+- [ ] Show anime title.
+- [ ] Show other anime details (description, number of episodes, genres, rating, etc). Feel free to add more.
+
+### Add to the collection
+[ ] As a user, I can the anime to the collection.
+
+Acceptance Criteria:
+- [ ] User can add anime to an existing collection.
+- [ ] If user want to add anime to collection but there is no collection yet, user can set collection name as new collection.
+- [ ] User can add an Anime to many collection
+- [ ] Collection Name must unique
+- [ ] Collection Name doesn’t have special Char
+
+### Collection info
+
+[ ] As a user, I can see if the anime already added to collection or not.
+
+Acceptance Criteria:
+- [ ] User can see list of collection names where the anime already added.
+- [ ] User can click the collection name, and will redirect to Collection Detail page.
+
+## Collection List Page
+
+### Collection list info.
+[ ] As a user, I can see list of collection that already added.
+
+Acceptance Criteria:
+- [ ] Show all collections at once on initial load page.
+- [ ] Each collection item should show collection name.
+- [ ] Each collection item should show anime cover/banner from the firstly added anime. If no anime added yet, use default image as cover/banner.
+- [ ] User can click the collection item, and will redirect to Collection Detail page.
+- [ ] The collections in this list should be persist even after a full page reload.
+
+### Remove Collection
+[ ] As a user, I can remove collection from Collection List page.
+
+Acceptance Criteria:
+- [ ] Show “Remove” button on each collection item/card.
+- [ ] Add confirmation modal/popup when user click Remove button, with collection name info.
+- [ ] After remove finished, collection list should be updated without reloading the page.
+
+### Add Collection
+
+[ ] As a user, I can add collection from Collection List page.
+
+Acceptance Criteria:
+- [ ] Show “Add a Collection” button on top of Collection List page.
+- [ ] When button clicked, show modal/popup to fill collection name (collection name should be unique) and submit as new collection.
+- [ ] After submit finished, new collection should automatically added to the list without reloading Collection List page.
+- [ ] Collection Name must unique
+- [ ] Collection Name doesn’t have special Char
+
+### Edit Collection
+[ ] As a user, I can edit collection name from Collection List page.
+
+Acceptance Criteria:
+- [ ] Show “Edit” button on each collection item/card.
+- [ ] Add modal/popup when user click Edit button, with collection name input field,and submit button.
+- [ ] After edit finished, collection list should be updated without reloading the page.
+- [ ] Collection Name must unique
+- [ ] Collection Name doesn’t have special Char.
+
+## Collection Detail Page
+
+### Collection detail info
+[ ] As a user, I can see list of anime that already added to the collection.
+
+Acceptance Criteria:
+- [ ] Show collection name on top of the Collection Detail page.
+- [ ] Show all added anime at once on initial load page.
+- [ ] Each anime item/card should show anime name & anime cover/banner.
+- [ ] User can click the anime item, and will redirect to Anime Detail page.
+
+### Remove anime from collection
+
+[ ] As a user, I can remove anime from Collection Detail page.
+
+Acceptance Criteria:
+- [ ] Show “Remove” button on each anime item/card.
+- [ ] Add confirmation modal/popup when user click Remove button, with anime title info.
+- [ ] After remove finished, anime list should be updated without reloading the page.
+
+### Edit Collection Name:
+[ ] As a user, I can edit collection name from Collection Detail page.
+
+Acceptance Criteria:
+- [ ] Show “Edit” button on top of Collection Detail page.
+- [ ] Add modal/popup when user click Edit button, with collection name input field, and submit button.
+- [ ] After edit finished, collection detail page should be updated without reloading thepage.
+- [ ] Collection Name must unique
+- [ ] Collection Name doesn’t have special Char.
