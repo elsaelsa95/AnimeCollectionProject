@@ -1,15 +1,6 @@
 import * as React from 'react'
-
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, MenuItem, Button } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import MenuItem from '@mui/material/MenuItem';
 import { useRouter } from 'next/router';
 
 export default function TopBar() {
@@ -26,9 +17,27 @@ export default function TopBar() {
     const router = useRouter()
 
     return (
-        <AppBar position="static">
-            <Container maxWidth="xl">
+        <AppBar position="static" sx={{ background: "black" }}>
+            <Container maxWidth="xl" >
                 <Toolbar disableGutters>
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="a"
+                        href="/"
+                        sx={{
+                            mr: 2,
+                            display: { xs: 'none', md: 'flex' },
+                            fontFamily: 'monospace',
+                            fontWeight: 700,
+                            letterSpacing: '.3rem',
+                            color: 'inherit',
+                            textDecoration: 'none',
+                        }}
+                    >
+                        MY ANIME PROJECT
+                    </Typography>
+
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
                             size="large"
@@ -69,8 +78,16 @@ export default function TopBar() {
                             textDecoration: 'none',
                         }}
                     >
-                        MY ANIME COLLECTION
+                        MY ANIME PROJECT
                     </Typography>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                        <Button onClick={() => router.push("/")} sx={{ my: 2, color: 'white', display: 'block' }}>
+                            Anime List
+                        </Button>
+                        <Button onClick={() => router.push("/collection")} sx={{ my: 2, color: 'white', display: 'block' }}>
+                            Collection
+                        </Button>
+                    </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
                         <Avatar src="https://cdn.idntimes.com/content-images/duniaku/post/20220725/anya1-7f16ce16fbbea5f3e28404ebbbad13dd.png" />
