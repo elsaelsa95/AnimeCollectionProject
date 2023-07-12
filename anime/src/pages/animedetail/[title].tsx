@@ -5,10 +5,11 @@ import { DUMMY_ANIME } from '../../../dummydatabase';
 import TopBar from '@/components/topbar';
 
 
-export default function Detail() {
+export default function AnimeDetail() {
     const router = useRouter()
-    const { id } = router.query
-    const anime = DUMMY_ANIME.find((a) => JSON.stringify(a.id) === id)
+    const { title } = router.query
+    console.log(title)
+    const anime = DUMMY_ANIME.find((a) => a.title == title)
     if (!anime) {
         return (
             <h1> ANIME NOT FOUND</h1>

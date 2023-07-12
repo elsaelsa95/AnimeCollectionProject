@@ -32,10 +32,10 @@ export default function UniversalCard({ id, title, cover, banner, description, e
                     sx={{ width: 200 }}
                     image={cover}
                     alt={title}
-                    onClick={() => router.push(`/animedetail/${id}`)}
+                    onClick={() => router.push(`/animedetail/${title}`)}
                 />
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <CardContent onClick={() => router.push(`/animedetail/${id}`)}>
+                    <CardContent onClick={() => router.push(`/animedetail/${title}`)}>
                         <Typography fontWeight="bold" fontSize="20px">
                             {title}
                         </Typography>
