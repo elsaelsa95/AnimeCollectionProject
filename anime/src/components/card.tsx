@@ -6,36 +6,36 @@ import { useRouter } from 'next/router';
 interface DetailCardProps {
     id: number
     title: string
-    cover: string
-    banner: string
+    coverImage: string
+    bannerImage: string
     description: string
-    episode: number
-    genre: string
-    ratings: number
-    collection: string | null
+    episodes: number
+    genres: string
+    averageScore: number
+    seasonYear: string | null
 }
 
-export default function UniversalCard({ id, title, cover, banner, description, episode, genre, ratings, collection }: DetailCardProps) {
+export default function UniversalCard({ id, title, coverImage, bannerImage, description, episodes, genres, averageScore, seasonYear }: DetailCardProps) {
     const [data, setData] = useState<DetailCardProps>()
 
     const handleSubmit = () => {
-        setData({ id, title, cover, banner, description, episode, genre, ratings, collection })
+        setData({ id, title, coverImage, bannerImage, description, episodes, genres, averageScore, seasonYear })
         console.log(data, "data")
     }
     const router = useRouter()
 
     return (
         <FormControl sx={{ p: 2 }}>
-            <Card sx={{ display: 'flex', width: 470, height: 250 }}>
+            <Card sx={{ display: 'flex', width: 470, height: 300 }}>
                 <CardMedia
                     component="img"
                     sx={{ width: 200 }}
-                    image={cover}
+                    image={coverImage}
                     alt={title}
-                    onClick={() => router.push(`/animedetail/${title}`)}
+                    onClick={() => router.push(`/animedetail/${id}`)}
                 />
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <CardContent onClick={() => router.push(`/animedetail/${title}`)}>
+                    <CardContent onClick={() => router.push(`/animedetail/${id}`)}>
                         <Typography fontWeight="bold" fontSize="20px">
                             {title}
                         </Typography>
@@ -43,19 +43,22 @@ export default function UniversalCard({ id, title, cover, banner, description, e
                             {description.length <= 100 ? description : (description.substring(0, 100) + "...")}
                         </Typography>
                         <Typography fontSize="14px">
-                            Episode : {episode}
+                            Episodes : {episodes}
                         </Typography>
                         <Typography fontSize="14px">
-                            Genre : {genre}
+                            Genres : {genres}
+                        </Typography>
+                        <Typography fontSize="14px">
+                            Season Year : {seasonYear}
                         </Typography>
                         <Grid container spacing={0}>
-                            <Grid item xs={3}>
+                            <Grid item xs={6}>
                                 <Typography fontSize="14px">
-                                    Ratings :
+                                    Average Score :
                                 </Typography>
                             </Grid>
-                            <Grid item xs={8}>
-                                <Rating name="half-rating-read" defaultValue={ratings} precision={0.5} readOnly size="small" />
+                            <Grid item xs={6}>
+                                <Rating name="half-rating-read" defaultValue={averageScore} precision={0.5} readOnly size="small" />
                             </Grid>
                         </Grid>
                     </CardContent>

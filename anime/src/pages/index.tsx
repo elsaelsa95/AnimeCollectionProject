@@ -1,10 +1,42 @@
 import * as React from 'react'
 import TopBar from '@/components/topbar';
 import { Box, Typography } from '@mui/material';
-import { DUMMY_ANIME } from '../../dummydatabase';
 import UniversalCard from '@/components/card';
+import { gql, useQuery } from '@apollo/client';
+
+const GET_ANIME_LIST = gql`
+    query GetAnimeList {
+        Page(perPage:10)
+        {
+          media
+          {	
+            id
+            title {romaji}
+            coverImage {medium}
+            bannerImage
+            description
+            episodes
+            genres
+            averageScore
+            seasonYear
+          }
+        }
+      }
+`
 
 export default function AnimeList() {
+    const { loading, error, data} = useQuery(GET_ANIME_LIST)
+    if (loading) {
+        return (
+            <h1> Loading...</h1>
+        )
+    }
+    if (error) {
+        return (
+            <h1>Oopss, something when wrong</h1>
+        )
+    }
+    // console.log(data)
     return (
         <Box sx={{ background: "black" }}>
             <TopBar />
@@ -16,18 +48,18 @@ export default function AnimeList() {
             >
                 Anime List
             </Typography>
-            {DUMMY_ANIME?.map((x, i) => (
+            {data?.Page.media.map((x: any) => (
                 <UniversalCard
-                    key={i}
+                    key={x.id}
                     id={x.id}
-                    title={x.title}
-                    cover={x.cover}
-                    banner={x.banner}
+                    title={x.title.romaji}
+                    coverImage={x.coverImage.medium}
+                    bannerImage={x.bannerImage}
                     description={x.description}
-                    episode={x.episode}
-                    genre={x.genre}
-                    ratings={x.ratings}
-                    collection={x.collection}
+                    episodes={x.episodes}
+                    genres={x.genres}
+                    averageScore={x.averageScore}
+                    seasonYear={x.seasonYear}
                 />
             ))}
         </Box>
