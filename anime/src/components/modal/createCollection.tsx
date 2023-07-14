@@ -22,14 +22,14 @@ export default function CreateCollection() {
     const [collectionName, setCollectionName] = useState("")
 
     let collectionList: any[] = []
-
+    let item: any[] =[]
     const onSubmit = (value: any) => {
         if (localStorage.getItem('collectionList') && localStorage.getItem('collectionList').length > 0) {
             collectionList = JSON.parse(localStorage.getItem('collectionList'))
-            localStorage.setItem('collectionList', JSON.stringify([...collectionList, { collectionName }]))
+            localStorage.setItem('collectionList', JSON.stringify([...collectionList, { collectionName, item }]))
         }
         else {
-            localStorage.setItem('collectionList', JSON.stringify([...collectionList, { collectionName }]))
+            localStorage.setItem('collectionList', JSON.stringify([...collectionList, { collectionName, item }]))
         }
         handleClose()
     }
@@ -40,7 +40,7 @@ export default function CreateCollection() {
                 onClick={handleOpen}
                 variant="outlined"
                 sx={{ background: 'white', color: "black", m: 2 }}>
-                Add Collection
+                Add New Collection
             </Button>
             <Modal
                 open={open}

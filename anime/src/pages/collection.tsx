@@ -56,7 +56,6 @@ export default function Collection() {
                                     <DeleteCollection collectionName={x.collectionName} />
                                 </Button>
                             </Box>
-
                         </Card>
                     )
                 })
@@ -64,6 +63,7 @@ export default function Collection() {
                 <Typography
                     fontWeight="bold"
                     fontSize="20px"
+                    color="white"
                     align="center"
                     m={10}>
                     YOU DONT HAVE ANY COLLECTION

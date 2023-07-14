@@ -3,6 +3,7 @@ import { Card, CardContent, Typography, CardMedia, Box, Rating, Grid, CardAction
 import { useRouter } from 'next/router';
 import TopBar from '@/components/topbar';
 import { gql, useQuery } from '@apollo/client';
+import AddToCollection from '@/components/modal/addToCollection';
 
 const GET_ANIME_BY_ID = gql`
     query GetAnimeById ($id: Int) { 
@@ -29,7 +30,6 @@ export default function AnimeDetail() {
             id: id
         }
     })
-    
 
     if (loading) {
         return (
@@ -42,10 +42,6 @@ export default function AnimeDetail() {
         )
     }
     // console.log(data)
-
-    const handleSubmit = () => {
-        console.log(data, "data")
-    }
 
     return (
         <Box sx={{ background: "black" }}>
@@ -86,11 +82,7 @@ export default function AnimeDetail() {
                         </Grid>
                     </CardContent>
                     <CardActions sx={{ justifyContent: "flex-end" }}>
-                        <Button
-                            size="small"
-                            variant="outlined"
-                            sx={{ background: 'white' }}
-                            onClick={() => handleSubmit()}>Add To Collection</Button>
+                        <AddToCollection id={id} title={data.Media.title.romaji} />
                     </CardActions>
                 </Card>
             </Box>
