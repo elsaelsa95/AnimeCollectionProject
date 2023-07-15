@@ -31,12 +31,12 @@ Acceptance Criteria:
 - [x] Show other anime details (description, number of episodes, genres, rating, etc). Feel free to add more.
 
 ### Add to the collection
-[ ] As a user, I can the anime to the collection.
+[x] As a user, I can the anime to the collection.
 
 Acceptance Criteria:
-- [ ] User can add anime to an existing collection.
-- [ ] If user want to add anime to collection but there is no collection yet, user can set collection name as new collection.
-- [ ] User can add an Anime to many collection
+- [x] User can add anime to an existing collection.
+- [x] If user want to add anime to collection but there is no collection yet, user can set collection name as new collection.
+- [x] User can add an Anime to many collection
 - [ ] Collection Name must unique
 - [ ] Collection Name doesn’t have special Char
 
@@ -92,21 +92,21 @@ Acceptance Criteria:
 ## Collection Detail Page
 
 ### Collection detail info
-[ ] As a user, I can see list of anime that already added to the collection.
+[x] As a user, I can see list of anime that already added to the collection.
 
 Acceptance Criteria:
-- [ ] Show collection name on top of the Collection Detail page.
-- [ ] Show all added anime at once on initial load page.
-- [ ] Each anime item/card should show anime name & anime cover/banner.
-- [ ] User can click the anime item, and will redirect to Anime Detail page.
+- [x] Show collection name on top of the Collection Detail page.
+- [x] Show all added anime at once on initial load page.
+- [x] Each anime item/card should show anime name & anime cover/banner.
+- [x] User can click the anime item, and will redirect to Anime Detail page.
 
 ### Remove anime from collection
 
-[ ] As a user, I can remove anime from Collection Detail page.
+[x] As a user, I can remove anime from Collection Detail page.
 
 Acceptance Criteria:
-- [ ] Show “Remove” button on each anime item/card.
-- [ ] Add confirmation modal/popup when user click Remove button, with anime title info.
+- [x] Show “Remove” button on each anime item/card.
+- [x] Add confirmation modal/popup when user click Remove button, with anime title info.
 - [ ] After remove finished, anime list should be updated without reloading the page.
 
 ### Edit Collection Name (Optional)

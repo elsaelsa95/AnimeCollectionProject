@@ -39,9 +39,12 @@ export default function AddToCollection({ id, title }: idAnime) {
 
         if (findCollection) {
             findCollection.item.push(id)
+
+            let newCollectionList = collectionList.splice(collectionList.indexOf(collectionName), findCollection)
+
+            localStorage.setItem('collectionList', JSON.stringify(collectionList))
         }
 
-        localStorage.setItem('collectionList', JSON.stringify(collectionList))
         handleClose()
     }
 
@@ -90,14 +93,12 @@ export default function AddToCollection({ id, title }: idAnime) {
                             </Typography>
                         }
                         <CreateCollection />
-                        {/* <Grid> */}
                         <Button
                             variant='outlined'
                             color="inherit"
                             onClick={() => handleClose()}>
                             Cancel
                         </Button>
-                        {/* </Grid> */}
                     </Grid>
                 </FormControl>
             </Modal>

@@ -1,6 +1,6 @@
 import * as React from "react"
 import TopBar from "@/components/topbar"
-import { Box, Card, CardMedia, CardContent, Typography, Button } from "@mui/material"
+import { Box, Card, CardMedia, CardContent, Typography, CardActions } from "@mui/material"
 import { useState, useEffect } from "react";
 import CreateCollection from "@/components/modal/createCollection";
 import DeleteCollection from "@/components/modal/deleteCollection";
@@ -18,8 +18,6 @@ export default function Collection() {
             setCollectionList([])
         }
     }, [])
-
-    // console.log(collectionList)
 
     const router = useRouter()
 
@@ -52,9 +50,9 @@ export default function Collection() {
                                         {x.collectionName}
                                     </Typography>
                                 </CardContent>
-                                <Button>
+                                <CardActions>
                                     <DeleteCollection collectionName={x.collectionName} />
-                                </Button>
+                                </CardActions>
                             </Box>
                         </Card>
                     )

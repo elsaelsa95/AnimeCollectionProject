@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Card, CardActions, CardContent, Button, Typography, CardMedia, FormControl, Box, Grid, Rating } from '@mui/material';
-import { useState } from 'react';
+import { Card, CardActions, CardContent, Typography, CardMedia, FormControl, Box, Grid, Rating } from '@mui/material';
 import { useRouter } from 'next/router';
 import AddToCollection from './modal/addToCollection';
 
@@ -47,20 +46,18 @@ export default function UniversalCard({ id, title, coverImage, bannerImage, desc
                             Season Year : {seasonYear}
                         </Typography>
                         <Grid container spacing={0}>
-                            <Grid item xs={6}>
+                            <Grid item xs={3}>
                                 <Typography fontSize="14px">
-                                    Average Score :
+                                    Ratings :
                                 </Typography>
                             </Grid>
-                            <Grid item xs={6}>
-                                <Rating name="half-rating-read" defaultValue={averageScore} precision={0.5} readOnly size="small" />
+                            <Grid item xs={8}>
+                                <Rating name="half-rating-read" defaultValue={averageScore / 20} precision={0.5} readOnly size="small" />
                             </Grid>
                         </Grid>
                     </CardContent>
                     <CardActions sx={{ justifyContent: "flex-end" }}>
-                        <Button>
-                            <AddToCollection id={JSON.stringify(id)} title={title} />
-                        </Button>
+                        <AddToCollection id={JSON.stringify(id)} title={title} />
                     </CardActions>
                 </Box>
             </Card>

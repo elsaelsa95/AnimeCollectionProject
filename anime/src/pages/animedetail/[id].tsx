@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Card, CardContent, Typography, CardMedia, Box, Rating, Grid, CardActions, Button } from '@mui/material';
+import { Card, CardContent, Typography, CardMedia, Box, Rating, Grid, CardActions } from '@mui/material';
 import { useRouter } from 'next/router';
 import TopBar from '@/components/topbar';
 import { gql, useQuery } from '@apollo/client';
@@ -41,7 +41,6 @@ export default function AnimeDetail() {
             <h1>Oopss, something when wrong</h1>
         )
     }
-    // console.log(data)
 
     return (
         <Box sx={{ background: "black" }}>
@@ -71,13 +70,13 @@ export default function AnimeDetail() {
                             Season Year : {data.Media.seasonYear}
                         </Typography>
                         <Grid container spacing={0}>
-                            <Grid item xs={3}>
+                            <Grid item xs={2}>
                                 <Typography variant="body2" color="white" sx={{ pb: 1 }}>
-                                    Average Score :
+                                    Ratings :
                                 </Typography>
                             </Grid>
                             <Grid item xs={8}>
-                                <Rating name="half-rating-read" defaultValue={data.Media.averageScore} precision={0.5} size="small" readOnly />
+                                <Rating name="half-rating-read" defaultValue={data.Media.averageScore/20} precision={0.5} size="small" readOnly />
                             </Grid>
                         </Grid>
                     </CardContent>

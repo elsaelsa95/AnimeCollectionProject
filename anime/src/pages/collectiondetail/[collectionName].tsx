@@ -34,10 +34,13 @@ export default function CollectionDetail() {
                 color="white"
                 sx={{ pl: 2 }}
             >
-                Collection Detail
+                Collection Detail : {collectionName}
             </Typography>
             {animeList.map((x: any) => (
-                <CardForCollectionDetail key={x} id={x} />
+                <CardForCollectionDetail
+                    key={x}
+                    id={x}
+                    collectionName={collectionName} />
             ))}
         </Box>
     )

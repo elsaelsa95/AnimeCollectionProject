@@ -36,7 +36,7 @@ export default function AnimeList() {
             <h1>Oopss, something when wrong</h1>
         )
     }
-    // console.log(data)
+
     return (
         <Box sx={{ background: "black" }}>
             <TopBar />

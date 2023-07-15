@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { FormControl, Typography, Button, Grid, Modal } from '@mui/material'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const style = {
     position: 'static',
@@ -15,20 +15,40 @@ const style = {
 };
 
 interface DetailCollection {
+    id: string
     collectionName: string
+    animeName: string
 }
 
-export default function DeleteCollection({ collectionName }: DetailCollection) {
+export default function DeleteFromCollection({ id, collectionName, animeName }: DetailCollection) {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    let [collectionList, setCollectionList] = useState<any[]>([])
+
+    useEffect(() => {
+        const value = localStorage.getItem("collectionList")
+        if (value) {
+            setCollectionList(JSON.parse(value))
+        }
+    }, [])
+
     const onSubmit = () => {
 
-        let collectionList = JSON.parse(localStorage.getItem('collectionList'))
-        let newCollectionList = collectionList.filter(collectionList => collectionList.collectionName !== collectionName)
+        const findCollection = collectionList.find((c) => c.collectionName === collectionName)
 
-        localStorage.setItem("collectionList", JSON.stringify(newCollectionList))
+        if (findCollection) {
+            for (let i = 0; i < findCollection.item.length; i++) {
+                if (findCollection.item[i] === id) {
+                    findCollection.item.splice(i, 1)
+                }
+            }
+        }
+
+        let newCollectionList = collectionList.splice(collectionList.indexOf(collectionName), findCollection)
+
+        localStorage.setItem("collectionList", JSON.stringify(collectionList))
         handleClose()
     }
 
@@ -44,7 +64,7 @@ export default function DeleteCollection({ collectionName }: DetailCollection) {
                 <FormControl sx={style}>
                     <Grid>
                         <Grid sx={{ display: "flex", flexDirection: "column", pb: 2 }}>
-                            <Typography> Are you sure to remove `{collectionName}`?</Typography>
+                            <Typography> Are you sure to remove `{animeName}` from `{collectionName}?</Typography>
                         </Grid>
                         <Grid >
                             <Button
