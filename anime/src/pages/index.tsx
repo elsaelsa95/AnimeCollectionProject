@@ -1,12 +1,12 @@
 import * as React from 'react'
 import TopBar from '@/components/topbar';
-import { Box, Typography } from '@mui/material';
+import { Box, Pagination, Typography } from '@mui/material';
 import UniversalCard from '@/components/card';
 import { gql, useQuery } from '@apollo/client';
 
 const GET_ANIME_LIST = gql`
     query GetAnimeList {
-        Page(perPage:10)
+        Page
         {
           media
           {	
@@ -25,7 +25,13 @@ const GET_ANIME_LIST = gql`
 `
 
 export default function AnimeList() {
-    const { loading, error, data} = useQuery(GET_ANIME_LIST)
+    const [page, setPage] = React.useState(1);
+    const dataPerPage = 10
+    const handleChangePage = (event: React.ChangeEvent<unknown>, newPage: number) => {
+        setPage(newPage);
+    };
+
+    const { loading, error, data } = useQuery(GET_ANIME_LIST)
     if (loading) {
         return (
             <h1> Loading...</h1>
@@ -48,7 +54,8 @@ export default function AnimeList() {
             >
                 Anime List
             </Typography>
-            {data?.Page.media.map((x: any) => (
+
+            {data?.Page.media.slice((page - 1) * dataPerPage, (page - 1) * dataPerPage + dataPerPage).map((x: any) => (
                 <UniversalCard
                     key={x.id}
                     id={x.id}
@@ -62,6 +69,13 @@ export default function AnimeList() {
                     seasonYear={x.seasonYear}
                 />
             ))}
+            <Pagination
+                count={Math.ceil(data.Page.media.length / dataPerPage)}
+                page={page}
+                onChange={handleChangePage}
+                variant="outlined"
+                sx={{ background: 'white' }}
+            />
         </Box>
     )
 }

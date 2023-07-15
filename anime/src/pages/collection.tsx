@@ -1,12 +1,18 @@
 import * as React from "react"
 import TopBar from "@/components/topbar"
-import { Box, Card, CardMedia, CardContent, Typography, CardActions } from "@mui/material"
+import { Box, Card, CardMedia, CardContent, Typography, CardActions, Pagination } from "@mui/material"
 import { useState, useEffect } from "react";
 import CreateCollection from "@/components/modal/createCollection";
 import DeleteCollection from "@/components/modal/deleteCollection";
 import { useRouter } from "next/router";
 
 export default function Collection() {
+    const [page, setPage] = React.useState(1);
+    const dataPerPage = 10
+    const handleChangePage = (event: React.ChangeEvent<unknown>, newPage: number) => {
+        setPage(newPage);
+    };
+
     const [collectionList, setCollectionList] = useState<any[]>([])
 
     useEffect(() => {
@@ -34,7 +40,7 @@ export default function Collection() {
             </Typography>
             <CreateCollection />
             {collectionList.length > 0 ?
-                collectionList.map((x, i) => {
+                collectionList.slice((page - 1) * dataPerPage, (page - 1) * dataPerPage + dataPerPage).map((x, i) => {
                     return (
                         <Card sx={{ display: 'flex', width: 470, height: 120, m: 2 }} key={i}>
                             <CardMedia
@@ -67,6 +73,13 @@ export default function Collection() {
                     YOU DONT HAVE ANY COLLECTION
                 </Typography>
             }
+            <Pagination
+                count={Math.ceil(collectionList.length / dataPerPage)}
+                page={page}
+                onChange={handleChangePage}
+                variant="outlined"
+                sx={{ background: 'white' }}
+            />
         </Box>
 
 

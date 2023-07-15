@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { FormControl, Typography, Button, Grid, Modal, Card, CardMedia, Box, CardContent } from '@mui/material'
+import { FormControl, Typography, Button, Grid, Modal, Card, CardMedia, Box, CardContent, Pagination } from '@mui/material'
 import { useEffect, useState } from 'react';
 import CreateCollection from './createCollection';
 
@@ -21,6 +21,12 @@ interface idAnime {
 }
 
 export default function AddToCollection({ id, title }: idAnime) {
+    const [page, setPage] = React.useState(1);
+    const dataPerPage = 5
+    const handleChangePage = (event: React.ChangeEvent<unknown>, newPage: number) => {
+        setPage(newPage);
+    };
+
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -63,7 +69,7 @@ export default function AddToCollection({ id, title }: idAnime) {
                             <Typography> Add `{title}` into collection: </Typography>
                         </Grid>
                         {collectionList.length > 0 ?
-                            collectionList.map((x, i) => {
+                            collectionList.slice((page - 1) * dataPerPage, (page - 1) * dataPerPage + dataPerPage).map((x, i) => {
                                 return (
                                     <Card sx={{ display: 'flex', width: 300, height: 100, m: 2 }} key={i}
                                         onClick={() => onSubmit(id, x.collectionName)}>
@@ -100,6 +106,13 @@ export default function AddToCollection({ id, title }: idAnime) {
                             Cancel
                         </Button>
                     </Grid>
+                    <Pagination
+                        count={Math.ceil(collectionList.length / dataPerPage)}
+                        page={page}
+                        onChange={handleChangePage}
+                        variant="outlined"
+                        sx={{ background: 'white' }}
+                    />
                 </FormControl>
             </Modal>
         </>

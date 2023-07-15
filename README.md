@@ -9,7 +9,7 @@ Requirement :
 Acceptance Criteria:
 - [x] For each anime, show info at least the anime title and anime cover/banner.
 - [x] Each anime item are clickable, and will redirect to Anime Detail page when clicked.
-- [ ] Anime List page should have pagination functionality.
+- [x] Anime List page should have pagination functionality.
 
 ### Bulk add to the collection (Optional).
 [ ] As a user, I can add multiple anime to the collection at once.
