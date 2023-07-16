@@ -35,7 +35,15 @@ export default function Collection() {
             >
                 Collection List
             </Typography>
-            <CreateCollection />
+            <CreateCollection onSubmitCollection={() => {
+                const value = localStorage.getItem("collectionList")
+                if (value) {
+                    setCollectionList(JSON.parse(value))
+                }
+                else {
+                    setCollectionList([])
+                }
+            }} />
             {collectionList.length > 0 ?
                 collectionList.slice((page - 1) * dataPerPage, (page - 1) * dataPerPage + dataPerPage).map((x, i) => {
                     return (

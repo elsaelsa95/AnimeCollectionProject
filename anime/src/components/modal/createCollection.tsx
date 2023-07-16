@@ -1,6 +1,9 @@
 import * as React from 'react'
-import { FormControl, Typography, Button, Grid, Modal, Input } from '@mui/material'
+import { Typography, Button, Grid, Modal, Card, TextField } from '@mui/material'
 import { useState } from 'react';
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
 
 const style = {
     position: 'static',
@@ -14,16 +17,30 @@ const style = {
     p: 4,
 };
 
-export default function CreateCollection() {
+const schema = yup
+    .object({
+        collectionName: yup.string().required("*Collection Name is Required").matches(/^[a-zA-Z0-9]*$/, "*Special Character is Not Allowed")
+    })
+    .required()
+
+export default function CreateCollection({onSubmitCollection}:{onSubmitCollection:()=> void}) {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const [collectionName, setCollectionName] = useState("")
+    const {
+        register,
+        formState: { errors },
+        handleSubmit } = useForm({
+            resolver: yupResolver(schema),
+        })
 
-    let collectionList: any[] = []
-    let item: any[] =[]
-    const onSubmit = (value: any) => {
+    const onSubmit = (data: any) => {
+        const collectionName = data.collectionName
+
+        let collectionList: any[] = []
+        let item: any[] = []
+
         if (localStorage.getItem('collectionList') && localStorage.getItem('collectionList').length > 0) {
             collectionList = JSON.parse(localStorage.getItem('collectionList'))
             localStorage.setItem('collectionList', JSON.stringify([...collectionList, { collectionName, item }]))
@@ -31,6 +48,7 @@ export default function CreateCollection() {
         else {
             localStorage.setItem('collectionList', JSON.stringify([...collectionList, { collectionName, item }]))
         }
+        onSubmitCollection()
         handleClose()
     }
 
@@ -48,35 +66,47 @@ export default function CreateCollection() {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <FormControl sx={style}>
-                    <Grid>
-                        <Grid sx={{ display: "flex", flexDirection: "column", pb: 2 }}>
-                            <Typography id="modal-modal-title" variant="h6" component="h2">
-                                Collection Name
-                            </Typography>
-                            <Input
-                                required
-                                id='collectionName'
-                                value={collectionName}
-                                onChange={(e) => setCollectionName(e.target.value)} />
+                <Card sx={{
+                    position: 'static',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(50%, 100%)',
+                    width: 400,
+                    bgcolor: 'background.paper',
+                    border: '2px solid #000',
+                    boxShadow: 24,
+                    p: 4,
+                }}>
+                    <form onSubmit={handleSubmit((onSubmit))}>
+                        <Grid>
+                            <Grid sx={{ display: "flex", flexDirection: "column", pb: 2 }}>
+                                <Typography id="modal-modal-title" variant="h6" component="h2">
+                                    Collection Name
+                                </Typography>
+                                <br></br>
+                                <TextField {...register("collectionName")} />
+                            </Grid>
+                            <Grid >
+                                <Typography fontSize="12px" color="red">
+                                    {errors.collectionName?.message}
+                                </Typography>
+                                <Button
+                                    variant='outlined'
+                                    color="inherit"
+                                    sx={{ mr: 2 }}
+                                    type="submit">
+                                    Submit
+                                </Button>
+                                <Button
+                                    variant='outlined'
+                                    color="inherit"
+                                    onClick={() => handleClose()}>
+                                    Cancel
+                                </Button>
+                            </Grid>
                         </Grid>
-                        <Grid >
-                            <Button
-                                variant='outlined'
-                                color="inherit"
-                                onClick={() => onSubmit(collectionName)}
-                                sx={{ mr: 2 }}>
-                                Submit
-                            </Button>
-                            <Button
-                                variant='outlined'
-                                color="inherit"
-                                onClick={() => handleClose()}>
-                                Cancel
-                            </Button>
-                        </Grid>
-                    </Grid>
-                </FormControl>
+                    </form>
+                </Card>
             </Modal>
         </>
     )

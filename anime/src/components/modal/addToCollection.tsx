@@ -87,7 +87,15 @@ export default function AddToCollection({ id, title }: idAnime) {
                                 YOU DONT HAVE ANY COLLECTION
                             </Typography>
                         }
-                        <CreateCollection />
+                        <CreateCollection onSubmitCollection={() => {
+                            const value = localStorage.getItem("collectionList")
+                            if (value) {
+                                setCollectionList(JSON.parse(value))
+                            }
+                            else {
+                                setCollectionList([])
+                            }
+                        }} />
                         <Button
                             variant='outlined'
                             color="inherit"

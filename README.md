@@ -38,7 +38,7 @@ Acceptance Criteria:
 - [x] If user want to add anime to collection but there is no collection yet, user can set collection name as new collection.
 - [x] User can add an Anime to many collection
 - [ ] Collection Name must unique
-- [ ] Collection Name doesn’t have special Char
+- [x] Collection Name doesn’t have special Char
 
 ### Collection info
 
@@ -75,9 +75,9 @@ Acceptance Criteria:
 Acceptance Criteria:
 - [x] Show “Add a Collection” button on top of Collection List page.
 - [x] When button clicked, show modal/popup to fill collection name (collection name should be unique) and submit as new collection.
-- [ ] After submit finished, new collection should automatically added to the list without reloading Collection List page.
+- [x] After submit finished, new collection should automatically added to the list without reloading Collection List page.
 - [ ] Collection Name must unique
-- [ ] Collection Name doesn’t have special Char
+- [x] Collection Name doesn’t have special Char
 
 ### Edit Collection (Optional)
 [ ] As a user, I can edit collection name from Collection List page.
