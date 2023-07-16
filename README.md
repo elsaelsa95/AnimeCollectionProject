@@ -56,7 +56,7 @@ Acceptance Criteria:
 Acceptance Criteria:
 - [x] Show all collections at once on initial load page.
 - [x] Each collection item should show collection name.
-- [ ] Each collection item should show anime cover/banner from the firstly added anime. If no anime added yet, use default image as cover/banner.
+- [x] Each collection item should show anime cover/banner from the firstly added anime. If no anime added yet, use default image as cover/banner.
 - [x] User can click the collection item, and will redirect to Collection Detail page.
 - [x] The collections in this list should be persist even after a full page reload.
 

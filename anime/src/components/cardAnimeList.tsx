@@ -17,7 +17,7 @@ interface DetailCardProps {
     seasonYear: string | null
 }
 
-export default function UniversalCard({ id, title, coverImage, bannerImage, description, episodes, genres, averageScore, seasonYear }: DetailCardProps) {
+export default function CardAnimeList({ id, title, coverImage, bannerImage, description, episodes, genres, averageScore, seasonYear }: DetailCardProps) {
     const router = useRouter()
 
     const [collectionList, setCollectionList] = useState<any[]>([])

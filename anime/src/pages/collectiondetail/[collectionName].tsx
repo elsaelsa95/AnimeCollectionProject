@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react';
 import TopBar from '@/components/topbar';
 import { Box, Pagination, Typography } from '@mui/material';
-import CardForCollectionDetail from '@/components/cardCollection';
+import CardForCollectionDetail from '@/components/cardCollectionDetail';
 
 export default function CollectionDetail() {
     const [page, setPage] = React.useState(1);
@@ -42,12 +42,22 @@ export default function CollectionDetail() {
             >
                 Collection Detail : {collectionName}
             </Typography>
-            {animeList.slice((page - 1) * dataPerPage, (page - 1) * dataPerPage + dataPerPage).map((x: any) => (
-                <CardForCollectionDetail
-                    key={x}
-                    id={x}
-                    collectionName={collectionName} />
-            ))}
+            {animeList.length > 0 ?
+                animeList.slice((page - 1) * dataPerPage, (page - 1) * dataPerPage + dataPerPage).map((x: any) => (
+                    <CardForCollectionDetail
+                        key={x}
+                        id={x}
+                        collectionName={collectionName} />
+                )) :
+                <Typography
+                    color='white'
+                    fontWeight="bold"
+                    fontSize="20px"
+                    align="center"
+                    m={10}>
+                    YOU DONT HAVE ANY COLLECTION
+                </Typography>
+            }
             <Pagination
                 count={Math.ceil(animeList.length / dataPerPage)}
                 page={page}

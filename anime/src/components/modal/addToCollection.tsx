@@ -1,7 +1,8 @@
 import * as React from 'react'
-import { FormControl, Typography, Button, Grid, Modal, Card, CardMedia, Box, CardContent, Pagination } from '@mui/material'
+import { FormControl, Typography, Button, Grid, Modal, Card, Pagination } from '@mui/material'
 import { useEffect, useState } from 'react';
 import CreateCollection from './createCollection';
+import CardForCollectionModal from '../cardCollectionModal';
 
 const style = {
     position: 'static',
@@ -22,7 +23,7 @@ interface idAnime {
 
 export default function AddToCollection({ id, title }: idAnime) {
     const [page, setPage] = React.useState(1);
-    const dataPerPage = 5
+    const dataPerPage = 3
     const handleChangePage = (event: React.ChangeEvent<unknown>, newPage: number) => {
         setPage(newPage);
     };
@@ -73,19 +74,7 @@ export default function AddToCollection({ id, title }: idAnime) {
                                 return (
                                     <Card sx={{ display: 'flex', width: 300, height: 100, m: 2 }} key={i}
                                         onClick={() => onSubmit(id, x.collectionName)}>
-                                        <CardMedia
-                                            component="img"
-                                            sx={{ width: 100 }}
-                                            image="https://www.denkapratama.co.id/assets/default-placeholder-57811f44.png"
-                                            alt={x.collectionName}
-                                        />
-                                        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                                            <CardContent>
-                                                <Typography fontWeight="bold" fontSize="20px">
-                                                    {x.collectionName}
-                                                </Typography>
-                                            </CardContent>
-                                        </Box>
+                                        <CardForCollectionModal collectionName={x.collectionName} />
                                     </Card>
                                 )
                             })

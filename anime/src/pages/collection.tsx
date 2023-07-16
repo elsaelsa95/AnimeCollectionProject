@@ -1,10 +1,9 @@
 import * as React from "react"
 import TopBar from "@/components/topbar"
-import { Box, Card, CardMedia, CardContent, Typography, CardActions, Pagination } from "@mui/material"
+import { Box, Typography, Pagination } from "@mui/material"
 import { useState, useEffect } from "react";
 import CreateCollection from "@/components/modal/createCollection";
-import DeleteCollection from "@/components/modal/deleteCollection";
-import { useRouter } from "next/router";
+import CardForCollectionList from "@/components/cardCollectionList";
 
 export default function Collection() {
     const [page, setPage] = React.useState(1);
@@ -25,8 +24,6 @@ export default function Collection() {
         }
     }, [])
 
-    const router = useRouter()
-
     return (
         <Box sx={{ background: "black", minHeight: "1000px" }}>
             <TopBar />
@@ -42,25 +39,7 @@ export default function Collection() {
             {collectionList.length > 0 ?
                 collectionList.slice((page - 1) * dataPerPage, (page - 1) * dataPerPage + dataPerPage).map((x, i) => {
                     return (
-                        <Card sx={{ display: 'flex', width: 470, height: 120, m: 2 }} key={i}>
-                            <CardMedia
-                                component="img"
-                                sx={{ width: 150 }}
-                                image="https://www.denkapratama.co.id/assets/default-placeholder-57811f44.png"
-                                alt={x.collectionName}
-                                onClick={() => router.push(`/collectiondetail/${x.collectionName}`)}
-                            />
-                            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                                <CardContent onClick={() => router.push(`/collectiondetail/${x.collectionName}`)}>
-                                    <Typography fontWeight="bold" fontSize="20px">
-                                        {x.collectionName}
-                                    </Typography>
-                                </CardContent>
-                                <CardActions>
-                                    <DeleteCollection collectionName={x.collectionName} />
-                                </CardActions>
-                            </Box>
-                        </Card>
+                        <CardForCollectionList key={i} collectionName={x.collectionName} />
                     )
                 })
                 :

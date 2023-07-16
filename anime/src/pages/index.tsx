@@ -1,7 +1,7 @@
 import * as React from 'react'
 import TopBar from '@/components/topbar';
 import { Box, Pagination, Typography } from '@mui/material';
-import UniversalCard from '@/components/card';
+import CardAnimeList from '@/components/cardAnimeList';
 import { gql, useQuery } from '@apollo/client';
 
 const GET_ANIME_LIST = gql`
@@ -56,7 +56,7 @@ export default function AnimeList() {
             </Typography>
 
             {data?.Page.media.slice((page - 1) * dataPerPage, (page - 1) * dataPerPage + dataPerPage).map((x: any) => (
-                <UniversalCard
+                <CardAnimeList
                     key={x.id}
                     id={x.id}
                     title={x.title.romaji}
