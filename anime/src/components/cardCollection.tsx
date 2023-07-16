@@ -2,9 +2,10 @@ import * as React from 'react';
 import { Card, CardActions, CardContent, Typography, CardMedia, FormControl, Box, Grid, Rating } from '@mui/material';
 import { useRouter } from 'next/router';
 import AddToCollection from './modal/addToCollection';
-
 import { gql, useQuery } from '@apollo/client';
 import DeleteFromCollection from './modal/removeFromCollection';
+import { useState, useEffect } from "react";
+import Link from 'next/link';
 
 interface DetailCardProps {
     id: string
@@ -29,6 +30,27 @@ const GET_ANIME_BY_ID = gql`
 
 export default function CardForCollectionDetail({ id, collectionName }: DetailCardProps) {
     const router = useRouter()
+
+    const [collectionList, setCollectionList] = useState<any[]>([])
+
+    useEffect(() => {
+        const value = localStorage.getItem("collectionList")
+        if (value) {
+            setCollectionList(JSON.parse(value))
+        }
+        else {
+            setCollectionList([])
+        }
+    }, [])
+
+    let searchCollectionName = []
+    for (let i = 0; i < collectionList.length; i++) {
+        for (let j = 0; j < collectionList[i].item.length; j++) {
+            if (collectionList[i].item[j] == id) {
+                searchCollectionName.push(collectionList[i].collectionName)
+            }
+        }
+    }
 
     const { loading, error, data } = useQuery(GET_ANIME_BY_ID, {
         variables: {
@@ -85,6 +107,11 @@ export default function CardForCollectionDetail({ id, collectionName }: DetailCa
                             </Grid>
                         </Grid>
                     </CardContent>
+                    <Typography fontSize="14px" sx={{ pl: 2, mt: -2 }} >
+                        Collection : {searchCollectionName.map((x: any, i: any) => (
+                            <Link key={i} href={`/collectiondetail/${x}`}> {x} ,</Link>
+                        ))}
+                    </Typography>
                     <CardActions sx={{ justifyContent: "flex-end" }}>
                         <AddToCollection
                             id={id}

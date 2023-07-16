@@ -42,11 +42,11 @@ Acceptance Criteria:
 
 ### Collection info
 
-[ ] As a user, I can see if the anime already added to collection or not.
+[x] As a user, I can see if the anime already added to collection or not.
 
 Acceptance Criteria:
-- [ ] User can see list of collection names where the anime already added.
-- [ ] User can click the collection name, and will redirect to Collection Detail page.
+- [x] User can see list of collection names where the anime already added.
+- [x] User can click the collection name, and will redirect to Collection Detail page.
 
 ## Collection List Page
 

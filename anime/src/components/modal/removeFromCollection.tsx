@@ -64,7 +64,7 @@ export default function DeleteFromCollection({ id, collectionName, animeName }: 
                 <FormControl sx={style}>
                     <Grid>
                         <Grid sx={{ display: "flex", flexDirection: "column", pb: 2 }}>
-                            <Typography> Are you sure to remove `{animeName}` from `{collectionName}?</Typography>
+                            <Typography> Are you sure to remove `{animeName}` from `{collectionName}`?</Typography>
                         </Grid>
                         <Grid >
                             <Button

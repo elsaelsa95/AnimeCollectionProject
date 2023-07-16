@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import TopBar from '@/components/topbar';
 import { gql, useQuery } from '@apollo/client';
 import AddToCollection from '@/components/modal/addToCollection';
+import { useState, useEffect } from "react";
+import Link from 'next/link';
 
 const GET_ANIME_BY_ID = gql`
     query GetAnimeById ($id: Int) { 
@@ -24,6 +26,27 @@ const GET_ANIME_BY_ID = gql`
 export default function AnimeDetail() {
     const router = useRouter()
     const { id } = router.query
+
+    const [collectionList, setCollectionList] = useState<any[]>([])
+
+    useEffect(() => {
+        const value = localStorage.getItem("collectionList")
+        if (value) {
+            setCollectionList(JSON.parse(value))
+        }
+        else {
+            setCollectionList([])
+        }
+    }, [])
+
+    let searchCollectionName = []
+    for (let i = 0; i < collectionList.length; i++) {
+        for (let j = 0; j < collectionList[i].item.length; j++) {
+            if (collectionList[i].item[j] == id) {
+                searchCollectionName.push(collectionList[i].collectionName)
+            }
+        }
+    }
 
     const { loading, error, data } = useQuery(GET_ANIME_BY_ID, {
         variables: {
@@ -76,10 +99,15 @@ export default function AnimeDetail() {
                                 </Typography>
                             </Grid>
                             <Grid item xs={8}>
-                                <Rating name="half-rating-read" defaultValue={data.Media.averageScore/20} precision={0.5} size="small" readOnly />
+                                <Rating name="half-rating-read" defaultValue={data.Media.averageScore / 20} precision={0.5} size="small" readOnly />
                             </Grid>
                         </Grid>
                     </CardContent>
+                    <Typography fontSize="14px" sx={{ pl: 2, mt: -2 }} color="white">
+                        Collection : {searchCollectionName.map((x: any, i: any) => (
+                            <Link key={i} href={`/collectiondetail/${x}`} style={{ color: 'white' }}> {x} ,</Link>
+                        ))}
+                    </Typography>
                     <CardActions sx={{ justifyContent: "flex-end" }}>
                         <AddToCollection id={id} title={data.Media.title.romaji} />
                     </CardActions>
