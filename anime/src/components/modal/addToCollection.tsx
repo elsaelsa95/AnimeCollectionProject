@@ -19,9 +19,10 @@ const style = {
 interface idAnime {
     id: any
     title: string
+    onChoose: () => void
 }
 
-export default function AddToCollection({ id, title }: idAnime) {
+export default function AddToCollection({ id, title, onChoose }: idAnime) {
     const [page, setPage] = React.useState(1);
     const dataPerPage = 3
     const handleChangePage = (event: React.ChangeEvent<unknown>, newPage: number) => {
@@ -51,7 +52,7 @@ export default function AddToCollection({ id, title }: idAnime) {
 
             localStorage.setItem('collectionList', JSON.stringify(collectionList))
         }
-
+        onChoose()
         handleClose()
     }
 

@@ -79,13 +79,21 @@ export default function CardAnimeList({ id, title, coverImage, bannerImage, desc
                             </Grid>
                         </Grid>
                     </CardContent>
-                    <Typography fontSize="14px" sx={{ pl:2, mt: -2 }}>
+                    <Typography fontSize="14px" sx={{ pl: 2, mt: -2 }}>
                         Collection : {searchCollectionName.map((x: any, i: any) => (
                             <Link key={i} href={`/collectiondetail/${x}`}> {x} ,</Link>
                         ))}
                     </Typography>
                     <CardActions sx={{ justifyContent: "flex-end" }}>
-                        <AddToCollection id={JSON.stringify(id)} title={title} />
+                        <AddToCollection id={JSON.stringify(id)} title={title} onChoose={() => {
+                            const value = localStorage.getItem("collectionList")
+                            if (value) {
+                                setCollectionList(JSON.parse(value))
+                            }
+                            else {
+                                setCollectionList([])
+                            }
+                        }} />
                     </CardActions>
                 </Box>
             </Card>

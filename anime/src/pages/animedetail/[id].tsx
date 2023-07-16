@@ -109,7 +109,15 @@ export default function AnimeDetail() {
                         ))}
                     </Typography>
                     <CardActions sx={{ justifyContent: "flex-end" }}>
-                        <AddToCollection id={id} title={data.Media.title.romaji} />
+                        <AddToCollection id={id} title={data.Media.title.romaji} onChoose={() => {
+                            const value = localStorage.getItem("collectionList")
+                            if (value) {
+                                setCollectionList(JSON.parse(value))
+                            }
+                            else {
+                                setCollectionList([])
+                            }
+                        }}/>
                     </CardActions>
                 </Card>
             </Box>
