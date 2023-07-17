@@ -26,8 +26,8 @@ export default function DeleteCollection({ collectionName, onDelete }: DetailCol
 
     const onSubmit = () => {
 
-        let collectionList = JSON.parse(localStorage.getItem('collectionList'))
-        let newCollectionList = collectionList.filter(collectionList => collectionList.collectionName !== collectionName)
+        let collectionList = JSON.parse(localStorage.getItem('collectionList') || '{}')
+        let newCollectionList = collectionList.filter((collectionList: any) => collectionList.collectionName !== collectionName)
 
         localStorage.setItem("collectionList", JSON.stringify(newCollectionList))
         onDelete()

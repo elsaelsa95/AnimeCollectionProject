@@ -41,8 +41,8 @@ export default function CreateCollection({onSubmitCollection}:{onSubmitCollectio
         let collectionList: any[] = []
         let item: any[] = []
 
-        if (localStorage.getItem('collectionList') && localStorage.getItem('collectionList').length > 0) {
-            collectionList = JSON.parse(localStorage.getItem('collectionList'))
+        if (localStorage.getItem('collectionList')) {
+            collectionList = JSON.parse(localStorage.getItem('collectionList') || '{}')
             localStorage.setItem('collectionList', JSON.stringify([...collectionList, { collectionName, item }]))
         }
         else {
