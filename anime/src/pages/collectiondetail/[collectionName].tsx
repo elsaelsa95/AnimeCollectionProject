@@ -47,7 +47,17 @@ export default function CollectionDetail() {
                     <CardForCollectionDetail
                         key={x}
                         id={x}
-                        collectionName={collectionName} />
+                        collectionName={collectionName} 
+                        onRefresh={() => {
+                            const value = localStorage.getItem("collectionList")
+                            if (value) {
+                                setCollectionList(JSON.parse(value))
+                            }
+                            else {
+                                setCollectionList([])
+                            }
+                        }}
+                        />
                 )) :
                 <Typography
                     color='white'

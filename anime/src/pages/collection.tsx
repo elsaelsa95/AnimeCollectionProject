@@ -47,7 +47,15 @@ export default function Collection() {
             {collectionList.length > 0 ?
                 collectionList.slice((page - 1) * dataPerPage, (page - 1) * dataPerPage + dataPerPage).map((x, i) => {
                     return (
-                        <CardForCollectionList key={i} collectionName={x.collectionName} />
+                        <CardForCollectionList key={i} collectionName={x.collectionName} onRefresh={() => {
+                            const value = localStorage.getItem("collectionList")
+                            if (value) {
+                                setCollectionList(JSON.parse(value))
+                            }
+                            else {
+                                setCollectionList([])
+                            }
+                        }} />
                     )
                 })
                 :

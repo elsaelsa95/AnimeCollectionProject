@@ -7,6 +7,7 @@ import DeleteCollection from './modal/deleteCollection';
 
 interface DetailCardProps {
     collectionName: any
+    onRefresh: () => void
 }
 
 const GET_ANIME_BY_ID = gql`
@@ -19,7 +20,7 @@ const GET_ANIME_BY_ID = gql`
     }
 `;
 
-export default function CardForCollectionList({ collectionName }: DetailCardProps) {
+export default function CardForCollectionList({ collectionName, onRefresh }: DetailCardProps) {
     const router = useRouter()
 
     const [collectionList, setCollectionList] = useState<any[]>([])
@@ -60,7 +61,17 @@ export default function CardForCollectionList({ collectionName }: DetailCardProp
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <DeleteCollection collectionName={collectionName} />
+                    <DeleteCollection collectionName={collectionName} onDelete={() => {
+                        const value = localStorage.getItem("collectionList")
+                        if (value) {
+                            setCollectionList(JSON.parse(value))
+                            onRefresh()
+                        }
+                        else {
+                            setCollectionList([])
+                            onRefresh()
+                        }
+                    }} />
                 </CardActions>
             </Box>
         </Card>

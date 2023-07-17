@@ -18,9 +18,10 @@ interface DetailCollection {
     id: string
     collectionName: string
     animeName: string
+    onDelete:() =>void
 }
 
-export default function DeleteFromCollection({ id, collectionName, animeName }: DetailCollection) {
+export default function DeleteFromCollection({ id, collectionName, animeName, onDelete }: DetailCollection) {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -31,6 +32,9 @@ export default function DeleteFromCollection({ id, collectionName, animeName }: 
         const value = localStorage.getItem("collectionList")
         if (value) {
             setCollectionList(JSON.parse(value))
+        }
+        else {
+            setCollectionList([])
         }
     }, [])
 
@@ -49,6 +53,7 @@ export default function DeleteFromCollection({ id, collectionName, animeName }: 
         let newCollectionList = collectionList.splice(collectionList.indexOf(collectionName), findCollection)
 
         localStorage.setItem("collectionList", JSON.stringify(collectionList))
+        onDelete()
         handleClose()
     }
 

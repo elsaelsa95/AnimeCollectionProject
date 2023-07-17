@@ -66,7 +66,7 @@ Acceptance Criteria:
 Acceptance Criteria:
 - [x] Show “Remove” button on each collection item/card.
 - [x] Add confirmation modal/popup when user click Remove button, with collection name info.
-- [ ] After remove finished, collection list should be updated without reloading the page.
+- [x] After remove finished, collection list should be updated without reloading the page.
 
 ### Add Collection
 
@@ -107,7 +107,7 @@ Acceptance Criteria:
 Acceptance Criteria:
 - [x] Show “Remove” button on each anime item/card.
 - [x] Add confirmation modal/popup when user click Remove button, with anime title info.
-- [ ] After remove finished, anime list should be updated without reloading the page.
+- [x] After remove finished, anime list should be updated without reloading the page.
 
 ### Edit Collection Name (Optional)
 [ ] As a user, I can edit collection name from Collection Detail page.

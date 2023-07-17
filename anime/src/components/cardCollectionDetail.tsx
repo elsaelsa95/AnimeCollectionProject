@@ -10,6 +10,7 @@ import Link from 'next/link';
 interface DetailCardProps {
     id: string
     collectionName: any
+    onRefresh: () => void
 }
 
 const GET_ANIME_BY_ID = gql`
@@ -28,7 +29,7 @@ const GET_ANIME_BY_ID = gql`
     }
 `;
 
-export default function CardForCollectionDetail({ id, collectionName }: DetailCardProps) {
+export default function CardForCollectionDetail({ id, collectionName, onRefresh}: DetailCardProps) {
     const router = useRouter()
 
     const [collectionList, setCollectionList] = useState<any[]>([])
@@ -109,17 +110,37 @@ export default function CardForCollectionDetail({ id, collectionName }: DetailCa
                     </CardContent>
                     <Typography fontSize="14px" sx={{ pl: 2, mt: -2 }} >
                         Collection : {searchCollectionName.map((x: any, i: any) => (
-                            <Link key={i} href={`/collectiondetail/${x}`}> {x} ,</Link>
+                            <Link key={i} href={`/collectiondetail/${x}`} onClick={()=>onRefresh()}> {x} ,</Link>
                         ))}
                     </Typography>
                     <CardActions sx={{ justifyContent: "flex-end" }}>
                         <AddToCollection
                             id={id}
-                            title={data.Media.title.romaji} />
+                            title={data.Media.title.romaji}
+                            onChoose={() => {
+                                const value = localStorage.getItem("collectionList")
+                                if (value) {
+                                    setCollectionList(JSON.parse(value))
+                                }
+                                else {
+                                    setCollectionList([])
+                                }
+                            }} />
                         <DeleteFromCollection
                             id={id}
                             collectionName={collectionName}
-                            animeName={data.Media.title.romaji} />
+                            animeName={data.Media.title.romaji}
+                            onDelete={() => {
+                                const value = localStorage.getItem("collectionList")
+                                if (value) {
+                                    if(value)
+                                    setCollectionList(JSON.parse(value))
+                                    onRefresh()
+                                }
+                                else {
+                                    setCollectionList([])
+                                }
+                            }} />
                     </CardActions>
                 </Box>
             </Card>

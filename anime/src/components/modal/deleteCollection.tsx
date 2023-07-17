@@ -16,9 +16,10 @@ const style = {
 
 interface DetailCollection {
     collectionName: string
+    onDelete: () => void
 }
 
-export default function DeleteCollection({ collectionName }: DetailCollection) {
+export default function DeleteCollection({ collectionName, onDelete }: DetailCollection) {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -29,6 +30,7 @@ export default function DeleteCollection({ collectionName }: DetailCollection) {
         let newCollectionList = collectionList.filter(collectionList => collectionList.collectionName !== collectionName)
 
         localStorage.setItem("collectionList", JSON.stringify(newCollectionList))
+        onDelete()
         handleClose()
     }
 
